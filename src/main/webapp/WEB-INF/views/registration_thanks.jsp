@@ -21,7 +21,7 @@
 
 <div class="container">
     <div class="text-center">
-        <h1>Thank you, <span class="text-primary">${name}</span>, for your registration!</h1>
+        <h1>Thank you, <span class="text-primary">${account.username}</span>, for your registration!</h1>
     </div>
 </div>
 

@@ -1,5 +1,7 @@
 package dasniko.soteria.controller;
 
+import dasniko.soteria.entity.Account;
+import dasniko.soteria.entity.AccountService;
 import dasniko.soteria.model.Registration;
 
 import javax.inject.Inject;
@@ -19,6 +21,8 @@ public class RegistrationController {
 
     @Inject
     private Models models;
+    @Inject
+    private AccountService accountService;
 
     @GET
     public String index() {
@@ -27,7 +31,12 @@ public class RegistrationController {
 
     @POST
     public String register(@BeanParam Registration registration) {
-        models.put("name", registration.getUsername());
+        // for demo purpose, no exception handling is done here
+        // in production environments, please add proper handling!
+        Account account = accountService.save(registration.getUsername(),
+            registration.getPassword(), registration.getEmail());
+
+        models.put("account", account);
         return "registration_thanks.jsp";
     }
 }
