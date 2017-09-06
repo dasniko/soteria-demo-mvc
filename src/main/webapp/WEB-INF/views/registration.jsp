@@ -27,15 +27,15 @@
                 <h2>Self-Registration</h2>
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+                    <input id="username" name="username" class="form-control" placeholder="Username" autofocus>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Password">
                 </div>
                 <div class="form-group">
                     <label for="email">Email address</label>
-                    <input type="email" id="email" name="email" class="form-control" placeholder="Email address" required>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="Email address">
                 </div>
                 <button class="btn btn-primary btn-block" type="submit">Register</button>
             </form>
