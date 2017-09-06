@@ -31,12 +31,15 @@ public class RegistrationController {
 
     @POST
     public String register(@BeanParam Registration registration) {
-        // for demo purpose, no exception handling is done here
-        // in production environments, please add proper handling!
-        Account account = accountService.save(registration.getUsername(),
-            registration.getPassword(), registration.getEmail());
 
-        models.put("account", account);
-        return "registration_thanks.jsp";
+        try {
+            Account account = accountService.save(registration.getUsername(),
+                registration.getPassword(), registration.getEmail());
+            models.put("account", account);
+            return "registration_thanks.jsp";
+        } catch (Exception e) {
+            models.put("errors", e.getMessage());
+            return index();
+        }
     }
 }
