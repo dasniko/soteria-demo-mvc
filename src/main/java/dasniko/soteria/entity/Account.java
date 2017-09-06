@@ -3,6 +3,7 @@ package dasniko.soteria.entity;
 import lombok.Data;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,8 +33,11 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(unique = true, nullable = false)
     private String username;
+    @Column(nullable = false)
     private String password;
+    @Column(unique = true, nullable = false)
     private String email;
     private boolean active;
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
