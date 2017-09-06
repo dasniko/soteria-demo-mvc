@@ -31,9 +31,9 @@ public class LoginController {
     @Inject
     private SecurityContext securityContext;
     @Context
-    HttpServletRequest request;
+    private HttpServletRequest request;
     @Context
-    HttpServletResponse response;
+    private HttpServletResponse response;
 
     @GET
     public String index() {
@@ -49,10 +49,8 @@ public class LoginController {
             AuthenticationParameters.withParams()
                 .credential(credential)
                 .newAuthentication(true)
-                .rememberMe(login.isRememberMe())
+//                .rememberMe(login.isRememberMe())
         );
-
-        System.out.println(authStatus.toString());
 
         if (authStatus.equals(AuthenticationStatus.SUCCESS)) {
             return "redirect:user";

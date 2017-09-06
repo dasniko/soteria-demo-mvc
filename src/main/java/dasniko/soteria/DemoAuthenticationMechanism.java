@@ -8,7 +8,6 @@ import javax.security.enterprise.authentication.mechanism.http.AutoApplySession;
 import javax.security.enterprise.authentication.mechanism.http.HttpAuthenticationMechanism;
 import javax.security.enterprise.authentication.mechanism.http.HttpMessageContext;
 import javax.security.enterprise.authentication.mechanism.http.LoginToContinue;
-import javax.security.enterprise.authentication.mechanism.http.RememberMe;
 import javax.security.enterprise.credential.Credential;
 import javax.security.enterprise.identitystore.IdentityStore;
 import javax.servlet.http.HttpServletRequest;
@@ -18,20 +17,18 @@ import javax.servlet.http.HttpServletResponse;
  * @author Niko Köbler, http://www.n-k.de, @dasniko
  */
 @AutoApplySession
-@RememberMe(
-    cookieMaxAgeSeconds = 60 * 60 * 24 * 14, // 14 days
-    isRememberMeExpression = "this.isRememberMe(httpMessageContext" // EL expression
-)
+//@RememberMe(
+//    cookieMaxAgeSeconds = 60 * 60 * 24 * 14, // 14 days
+//    isRememberMeExpression = "this.isRememberMe(httpMessageContext)" // EL expression
+//)
 @LoginToContinue(
-    loginPage = "",
-    errorPage = "",
     useForwardToLogin = false
 )
 @ApplicationScoped
 public class DemoAuthenticationMechanism implements HttpAuthenticationMechanism {
 
     @Inject
-    IdentityStore identityStore;
+    private IdentityStore identityStore;
 
     @Override
     public AuthenticationStatus validateRequest(HttpServletRequest request, HttpServletResponse response,
