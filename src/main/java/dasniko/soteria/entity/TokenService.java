@@ -1,6 +1,6 @@
 package dasniko.soteria.entity;
 
-import dasniko.soteria.exception.InvalidUsernameException;
+import dasniko.soteria.SecurityException;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import java.time.Instant;
 import java.util.UUID;
 
+import static dasniko.soteria.SecurityException.Reason.INVALID_USERNAME;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 /**
@@ -18,10 +19,10 @@ import static java.time.temporal.ChronoUnit.DAYS;
 public class TokenService {
 
     @PersistenceContext
-    EntityManager em;
+    private EntityManager em;
 
     @Inject
-    AccountService accountService;
+    private AccountService accountService;
 
     public String generate(final String username, final String ipAddress,
                            final String description, final TokenType tokenType) {
@@ -36,7 +37,8 @@ public class TokenService {
     public void save(final String rawToken, final String username, final String ipAddress,
                      final String description, final TokenType tokenType, final Instant expiration) {
 
-        Account account = accountService.getByUsername(username).orElseThrow(InvalidUsernameException::new);
+        Account account = accountService.getByUsername(username)
+            .orElseThrow(() -> new SecurityException(INVALID_USERNAME));
 
         Token token = new Token();
         token.setTokenHash(rawToken);

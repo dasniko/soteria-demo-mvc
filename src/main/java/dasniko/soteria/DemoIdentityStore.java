@@ -2,8 +2,6 @@ package dasniko.soteria;
 
 import dasniko.soteria.entity.Account;
 import dasniko.soteria.entity.AccountService;
-import dasniko.soteria.exception.AccountNotVerifiedException;
-import dasniko.soteria.exception.InvalidCredentialException;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -12,6 +10,9 @@ import javax.security.enterprise.credential.Credential;
 import javax.security.enterprise.credential.UsernamePasswordCredential;
 import javax.security.enterprise.identitystore.CredentialValidationResult;
 import javax.security.enterprise.identitystore.IdentityStore;
+
+import static dasniko.soteria.SecurityException.Reason.ACCOUNT_NOT_VERIFIED;
+import static dasniko.soteria.SecurityException.Reason.INVALID_CREDENTIALS;
 
 /**
  * @author Niko Köbler, http://www.n-k.de, @dasniko
@@ -37,10 +38,10 @@ public class DemoIdentityStore implements IdentityStore {
                 String username = ((CallerOnlyCredential) credential).getCaller();
 
                 return validate(accountService.getByUsername(username)
-                    .orElseThrow(InvalidCredentialException::new));
+                    .orElseThrow(() -> new SecurityException(INVALID_CREDENTIALS)));
             }
 
-        } catch (InvalidCredentialException e) {
+        } catch (SecurityException e) {
             return CredentialValidationResult.INVALID_RESULT;
         }
 
@@ -49,7 +50,7 @@ public class DemoIdentityStore implements IdentityStore {
 
     private CredentialValidationResult validate(Account account) {
         if (!account.isActive()) {
-            throw new AccountNotVerifiedException();
+            throw new SecurityException(ACCOUNT_NOT_VERIFIED);
         }
 
         return new CredentialValidationResult(account.getUsername());

@@ -1,13 +1,15 @@
 package dasniko.soteria.entity;
 
-import dasniko.soteria.exception.InvalidPasswordException;
-import dasniko.soteria.exception.InvalidUsernameException;
+import dasniko.soteria.SecurityException;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.Optional;
+
+import static dasniko.soteria.SecurityException.Reason.INVALID_PASSWORD;
+import static dasniko.soteria.SecurityException.Reason.INVALID_USERNAME;
 
 /**
  * @author Niko Köbler, http://www.n-k.de, @dasniko
@@ -54,10 +56,10 @@ public class AccountService {
     }
 
     public Account getByUsernameAndPassword(final String username, final String password) {
-        Account account = getByUsername(username).orElseThrow(InvalidUsernameException::new);
+        Account account = getByUsername(username).orElseThrow(() -> new SecurityException(INVALID_USERNAME));
 
         if (!account.getPassword().equals(password)) {
-            throw new InvalidPasswordException();
+            throw new SecurityException(INVALID_PASSWORD);
         }
 
         return account;
