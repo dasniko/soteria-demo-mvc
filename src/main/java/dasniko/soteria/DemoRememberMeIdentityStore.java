@@ -10,7 +10,6 @@ import javax.security.enterprise.CallerPrincipal;
 import javax.security.enterprise.credential.RememberMeCredential;
 import javax.security.enterprise.identitystore.CredentialValidationResult;
 import javax.security.enterprise.identitystore.RememberMeIdentityStore;
-import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 import java.util.Set;
 
@@ -20,11 +19,9 @@ import java.util.Set;
 public class DemoRememberMeIdentityStore implements RememberMeIdentityStore {
 
     @Inject
-    HttpServletRequest request;
+    private AccountService accountService;
     @Inject
-    AccountService accountService;
-    @Inject
-    TokenService tokenService;
+    private TokenService tokenService;
 
     @Override
     public CredentialValidationResult validate(RememberMeCredential credential) {
@@ -36,16 +33,12 @@ public class DemoRememberMeIdentityStore implements RememberMeIdentityStore {
 
     @Override
     public String generateLoginToken(CallerPrincipal callerPrincipal, Set<String> groups) {
-        return tokenService.generate(callerPrincipal.getName(), request.getRemoteAddr(), getDescription(), TokenType.REMEMBER_ME);
+        return tokenService.generate(callerPrincipal.getName(), TokenType.REMEMBER_ME);
     }
 
     @Override
     public void removeLoginToken(String token) {
         tokenService.remove(token);
-    }
-
-    private String getDescription() {
-        return "Remember me session: " + request.getHeader("USer-Agent");
     }
 
 }

@@ -12,7 +12,7 @@ public class SecurityException extends RuntimeException {
         super(reason.name());
     }
 
-    public static enum Reason {
+    public enum Reason {
         ACCOUNT_NOT_VERIFIED,
         INVALID_CREDENTIALS,
         INVALID_PASSWORD,

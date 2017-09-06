@@ -55,10 +55,11 @@ public class LoginController {
         if (authStatus.equals(AuthenticationStatus.SUCCESS)) {
             return "redirect:user";
         } else if (authStatus.equals(AuthenticationStatus.SEND_FAILURE)) {
-            models.put("errorMsg", "blöd");
-            return "login";
+            models.put("errors", "Error during authentication: username and/or password not correct.");
+            return index();
+        } else {
+            models.put("errors", "Unexpected error during authentication: " + authStatus.name());
+            return index();
         }
-
-        return "login";
     }
 }

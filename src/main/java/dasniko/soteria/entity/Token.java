@@ -27,12 +27,10 @@ import static java.time.temporal.ChronoUnit.MONTHS;
 @EqualsAndHashCode(of = "id")
 @NamedQueries({
     @NamedQuery(name = Token.REMOVE_TOKEN, query = "delete from Token t where t.tokenHash = :tokenHash"),
-    @NamedQuery(name = Token.REMOVE_EXPIRED_TOKEN, query = "delete from Token t where t.expiration < CURRENT_TIMESTAMP")
 })
 public class Token {
 
     public static final String REMOVE_TOKEN = "removeToken";
-    public static final String REMOVE_EXPIRED_TOKEN = "removeExpiredToken";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,8 +38,6 @@ public class Token {
     private String tokenHash;
     @Enumerated(EnumType.STRING)
     private TokenType tokenType;
-    private String ipAddress;
-    private String description;
     private Instant created;
     private Instant expiration;
     @ManyToOne(fetch = FetchType.LAZY)

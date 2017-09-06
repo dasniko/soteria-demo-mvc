@@ -1,3 +1,4 @@
 <jboss-web>
+    <context-root>/</context-root>
     <security-domain>jaspitest</security-domain>
 </jboss-web>
