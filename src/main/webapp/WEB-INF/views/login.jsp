@@ -39,7 +39,7 @@
                 </div>
                 <button class="btn btn-primary btn-block" type="submit">Sign in</button>
             </form>
-            <a href="./registration">New Registration</a>
+            <a href="./registration">New Registration &raquo;</a>
         </div>
     </div>
 </div>

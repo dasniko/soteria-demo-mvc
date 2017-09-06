@@ -21,6 +21,7 @@
 
 <div class="container">
     <h1>Hello ${name}!</h1>
+    <p><a href="./user/logout">Logout &raquo;</a></p>
 </div>
 
 </body>

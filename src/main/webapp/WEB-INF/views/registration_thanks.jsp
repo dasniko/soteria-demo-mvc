@@ -22,6 +22,7 @@
 <div class="container">
     <div class="text-center">
         <h1>Thank you, <span class="text-primary">${account.username}</span>, for your registration!</h1>
+        <p><a href="./user">Continue &raquo;</a></p>
     </div>
 </div>
 
