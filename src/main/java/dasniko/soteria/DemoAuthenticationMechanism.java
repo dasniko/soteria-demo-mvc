@@ -23,7 +23,6 @@ import javax.servlet.http.HttpServletResponse;
     isRememberMeExpression = "self.isRememberMe(httpMessageContext)"
 )
 @LoginToContinue(
-    loginPage = "/demo/login",
     useForwardToLogin = false
 )
 @ApplicationScoped
