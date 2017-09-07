@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import java.util.Collections;
 import java.util.Optional;
 
 import static dasniko.soteria.SecurityException.Reason.INVALID_PASSWORD;
@@ -71,6 +72,7 @@ public class AccountService {
         account.setPassword(password);
         account.setEmail(email);
         account.setActive(true);
+        account.setRoles(Collections.singleton("user"));
         return em.merge(account);
     }
 }
