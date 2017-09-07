@@ -3,7 +3,6 @@ package dasniko.soteria;
 import dasniko.soteria.entity.Account;
 import dasniko.soteria.entity.AccountService;
 import dasniko.soteria.entity.TokenService;
-import dasniko.soteria.entity.TokenType;
 
 import javax.inject.Inject;
 import javax.security.enterprise.CallerPrincipal;
@@ -25,7 +24,7 @@ public class DemoRememberMeIdentityStore implements RememberMeIdentityStore {
 
     @Override
     public CredentialValidationResult validate(RememberMeCredential credential) {
-        Optional<Account> account = accountService.getByLoginToken(credential.getToken(), TokenType.REMEMBER_ME);
+        Optional<Account> account = accountService.getByLoginToken(credential.getToken());
 
         return account.map(a -> new CredentialValidationResult(new CallerPrincipal(a.getUsername())))
             .orElse(CredentialValidationResult.INVALID_RESULT);
@@ -33,7 +32,7 @@ public class DemoRememberMeIdentityStore implements RememberMeIdentityStore {
 
     @Override
     public String generateLoginToken(CallerPrincipal callerPrincipal, Set<String> groups) {
-        return tokenService.generate(callerPrincipal.getName(), TokenType.REMEMBER_ME);
+        return tokenService.generate(callerPrincipal.getName());
     }
 
     @Override

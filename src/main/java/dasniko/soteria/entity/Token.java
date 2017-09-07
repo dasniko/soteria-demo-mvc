@@ -36,8 +36,6 @@ public class Token {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String tokenHash;
-    @Enumerated(EnumType.STRING)
-    private TokenType tokenType;
     private Instant created;
     private Instant expiration;
     @ManyToOne(fetch = FetchType.LAZY)

@@ -24,16 +24,16 @@ public class TokenService {
     @Inject
     private AccountService accountService;
 
-    public String generate(final String username, final TokenType tokenType) {
+    public String generate(final String username) {
         String rawToken = UUID.randomUUID().toString();
         Instant expiration = Instant.now().plus(14, DAYS);
 
-        save(rawToken, username, tokenType, expiration);
+        save(rawToken, username, expiration);
 
         return rawToken;
     }
 
-    private void save(final String rawToken, final String username, final TokenType tokenType, final Instant expiration) {
+    private void save(final String rawToken, final String username, final Instant expiration) {
 
         Account account = accountService.getByUsername(username)
             .orElseThrow(() -> new SecurityException(INVALID_USERNAME));
@@ -41,7 +41,6 @@ public class TokenService {
         Token token = new Token();
         token.setTokenHash(rawToken);
         token.setExpiration(expiration);
-        token.setTokenType(tokenType);
 
         account.addToken(token);
 

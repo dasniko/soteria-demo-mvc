@@ -43,12 +43,11 @@ public class AccountService {
         }
     }
 
-    public Optional<Account> getByLoginToken(String loginToken, TokenType tokenType) {
+    public Optional<Account> getByLoginToken(String loginToken) {
         try {
             return Optional.of(
                 em.createNamedQuery(Account.FIND_BY_TOKEN, Account.class)
                 .setParameter("tokenHash", loginToken)
-                .setParameter("tokenType", tokenType)
                 .getSingleResult()
             );
         } catch (NoResultException e) {
