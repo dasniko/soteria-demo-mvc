@@ -1,3 +1,4 @@
+<%@tag description="Base Layout Tag" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,3 +13,19 @@
 <body>
 
 <div class="container">
+
+    <jsp:doBody/>
+
+    <hr/>
+
+    <footer>
+        &copy; Niko K&ouml;bler -
+        <a href="https://www.n-k.de" target="_blank">www.n-k.de</a> -
+        <a href="https://twitter.com/dasniko target="_blank">@dasniko</a>
+        <a href="https://github.com/dasniko/soteria-demo-mvc" target="_blank" class="pull-right">Project GitHub Repository</a>
+    </footer>
+
+</div>
+
+</body>
+</html>
