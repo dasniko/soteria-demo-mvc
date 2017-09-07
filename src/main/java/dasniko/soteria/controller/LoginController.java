@@ -49,7 +49,7 @@ public class LoginController {
             AuthenticationParameters.withParams()
                 .credential(credential)
                 .newAuthentication(true)
-//                .rememberMe(login.isRememberMe())
+                .rememberMe(login.isRememberMe())
         );
 
         if (authStatus.equals(AuthenticationStatus.SUCCESS)) {
