@@ -4,6 +4,9 @@ Custom MVC Demo for Java EE 8 [Security API (JSR-375)](https://github.com/javaee
 
 UI technology used is [MVC 1.0, RI Ozark](https://www.mvc-spec.org).
 
+<img src="./doc/login.png" width="300px">
+<img src="./doc/registration.png" width="300px">
+
 ## Runtime Environment
 
 This demo is created to run in a JBoss Wildfly 11 application server.
@@ -15,7 +18,3 @@ So you don't need to set up a separate database for using this demo.
 
 Hibernate is configured to create/update the schema on startup (`hibernate.hbm2ddl.auto = update`).
 If you start using this application, consider you have an empty schema w/o data.
-
-## Caveats
-
-Error handling is not properly implemented, as this is still a demo on how to implement the features of the Security API!
