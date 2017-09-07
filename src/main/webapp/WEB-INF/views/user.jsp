@@ -13,7 +13,8 @@
 <body>
 
 <div class="container">
-    <h1>Hello ${name}!</h1>
+    <h1>Hello ${account.username}!</h1>
+    <p>Email: ${account.email}</p>
     <p><a href="./user/logout">Logout &raquo;</a></p>
 </div>
 

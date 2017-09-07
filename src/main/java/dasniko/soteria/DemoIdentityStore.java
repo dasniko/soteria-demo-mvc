@@ -11,6 +11,8 @@ import javax.security.enterprise.credential.UsernamePasswordCredential;
 import javax.security.enterprise.identitystore.CredentialValidationResult;
 import javax.security.enterprise.identitystore.IdentityStore;
 
+import java.util.Collections;
+
 import static dasniko.soteria.SecurityException.Reason.ACCOUNT_NOT_VERIFIED;
 import static dasniko.soteria.SecurityException.Reason.INVALID_CREDENTIALS;
 
@@ -53,6 +55,6 @@ public class DemoIdentityStore implements IdentityStore {
             throw new SecurityException(ACCOUNT_NOT_VERIFIED);
         }
 
-        return new CredentialValidationResult(account.getUsername());
+        return new CredentialValidationResult(account.getUsername(), Collections.singleton("user"));
     }
 }
