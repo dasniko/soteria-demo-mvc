@@ -2,7 +2,6 @@ package dasniko.soteria.model;
 
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.ws.rs.FormParam;
 
@@ -11,12 +10,10 @@ import javax.ws.rs.FormParam;
  */
 @Data
 public class Login {
-    @NotNull
-    @Size(min = 3)
+    @Size(min = 1, message = "Please enter a valid username.")
     @FormParam("username")
     private String username;
-    @NotNull
-    @Size(min = 8)
+    @Size(min = 1, message = "Please enter a valid password.")
     @FormParam("password")
     private String password;
     @FormParam("rememberMe")

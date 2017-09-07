@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +16,13 @@
 <div class="container">
     <h1>Hello ${account.username}!</h1>
     <p>Email: ${account.email}</p>
-    <p><a href="./user/logout">Logout &raquo;</a></p>
+    Roles:
+    <ul>
+        <c:forEach var="role" items="${account.roles}">
+            <li>${role}</li>
+        </c:forEach>
+    </ul>
+    <p><a href="./user/logout" class="btn btn-primary">Logout &raquo;</a></p>
 </div>
 
 </body>

@@ -13,9 +13,13 @@
 <body>
 
 <div class="container">
-    <div class="text-center">
-        <h1>Thank you, <span class="text-primary">${account.username}</span>, for your registration!</h1>
-        <p><a href="./user">Continue &raquo;</a></p>
+    <div class="col-md-12">
+        <h1 class="alert alert-success">Thank you ${account.username}, for your registration!</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <a href="./user" class="btn btn-primary btn-block">Continue &raquo;</a>
+        </div>
     </div>
 </div>
 

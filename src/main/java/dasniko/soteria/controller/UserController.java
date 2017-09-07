@@ -30,7 +30,8 @@ public class UserController {
 
     @GET
     public String index() {
-        Optional<Account> account = accountService.getByUsername(securityContext.getCallerPrincipal().getName());
+        String name = securityContext.getCallerPrincipal().getName();
+        Optional<Account> account = accountService.getByUsername(name);
         account.ifPresent(account1 -> models.put("account", account1));
         return "user.jsp";
     }

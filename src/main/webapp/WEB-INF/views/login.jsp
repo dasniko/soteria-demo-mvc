@@ -15,10 +15,12 @@
 
 <div class="container">
     <c:if test="${errors != null}">
-        <div class="row">
-            <div class="col-md-12">
-                <p class="alert alert-danger">${errors}</p>
-            </div>
+        <div class="alert alert-danger">
+            <ul>
+                <c:forEach var="error" items="${errors}">
+                    <li>${error}</li>
+                </c:forEach>
+            </ul>
         </div>
     </c:if>
     <div class="row">

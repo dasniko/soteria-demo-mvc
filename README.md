@@ -6,7 +6,7 @@ UI technology used is [MVC 1.0, RI Ozark](https://www.mvc-spec.org).
 
 ## Runtime Environment
 
-This demo is created to run in a JBoss Wildfly (>=10) application server.
+This demo is created to run in a JBoss Wildfly 11 application server.
 
 ## Persistence
 

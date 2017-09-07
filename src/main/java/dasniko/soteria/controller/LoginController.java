@@ -5,6 +5,8 @@ import dasniko.soteria.model.Login;
 import javax.inject.Inject;
 import javax.mvc.Models;
 import javax.mvc.annotation.Controller;
+import javax.mvc.binding.BindingResult;
+import javax.mvc.binding.ValidationError;
 import javax.security.enterprise.AuthenticationStatus;
 import javax.security.enterprise.SecurityContext;
 import javax.security.enterprise.authentication.mechanism.http.AuthenticationParameters;
@@ -13,11 +15,16 @@ import javax.security.enterprise.credential.Password;
 import javax.security.enterprise.credential.UsernamePasswordCredential;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import javax.validation.executable.ExecutableType;
+import javax.validation.executable.ValidateOnExecution;
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Niko Köbler, http://www.n-k.de, @dasniko
@@ -30,6 +37,8 @@ public class LoginController {
     private Models models;
     @Inject
     private SecurityContext securityContext;
+    @Inject
+    private BindingResult bindingResult;
     @Context
     private HttpServletRequest request;
     @Context
@@ -41,7 +50,15 @@ public class LoginController {
     }
 
     @POST
-    public String login(@BeanParam Login login) {
+    @ValidateOnExecution(type = ExecutableType.NONE)
+    public String login(@Valid @BeanParam Login login) {
+        if (bindingResult.isFailed()) {
+            List<String> errors = bindingResult.getAllValidationErrors().stream()
+                .map(ValidationError::getMessage)
+                .collect(Collectors.toList());
+            models.put("errors", errors);
+            return index();
+        }
 
         Credential credential = new UsernamePasswordCredential(login.getUsername(), new Password(login.getPassword()));
 
