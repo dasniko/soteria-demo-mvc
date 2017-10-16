@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
     isRememberMeExpression = "self.isRememberMe(httpMessageContext)"
 )
 @LoginToContinue(
+    loginPage = "/soteria/login",
     useForwardToLogin = false
 )
 @ApplicationScoped
