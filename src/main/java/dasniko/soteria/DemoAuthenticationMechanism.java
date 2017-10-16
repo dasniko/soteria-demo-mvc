@@ -2,7 +2,7 @@ package dasniko.soteria;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.security.auth.message.AuthException;
+import javax.security.enterprise.AuthenticationException;
 import javax.security.enterprise.AuthenticationStatus;
 import javax.security.enterprise.authentication.mechanism.http.AutoApplySession;
 import javax.security.enterprise.authentication.mechanism.http.HttpAuthenticationMechanism;
@@ -20,7 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 @AutoApplySession
 @RememberMe(
     cookieMaxAgeSeconds = 60 * 60 * 24 * 14, // 14 days
-    isRememberMeExpression = "self.isRememberMe(httpMessageContext)"
+    cookieSecureOnly = false, // this is just for demo and local purposes, don't use this in production!!
+    isRememberMeExpression = "#{self.isRememberMe(httpMessageContext)}"
 )
 @LoginToContinue(
     loginPage = "/soteria/login",
@@ -34,7 +35,7 @@ public class DemoAuthenticationMechanism implements HttpAuthenticationMechanism 
 
     @Override
     public AuthenticationStatus validateRequest(HttpServletRequest request, HttpServletResponse response,
-                                                HttpMessageContext httpMessageContext) throws AuthException {
+                                                HttpMessageContext httpMessageContext) throws AuthenticationException {
         Credential credential = httpMessageContext.getAuthParameters().getCredential();
 
         if (credential != null) {
